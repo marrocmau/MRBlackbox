@@ -3,102 +3,104 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Phase_2_Completed-667eeb?style=for-the-badge" alt="Status">
   <img src="https://img.shields.io/badge/Local--First-Privacy_by_Design-green?style=for-the-badge" alt="Local First">
+  <img src="https://img.shields.io/badge/Language-EN%20%7C%20IT-blue?style=for-the-badge" alt="Multi-language">
 </p>
 
-**MR Blackbox** è lo strumento locale di "scatola nera" progettato per misurare con precisione quanto costa costruire ogni singolo progetto (app, siti, SaaS) utilizzando agenti coder come **Claude Code**, **Gemini CLI** e **Codex CLI**.
+**MR Blackbox** is a local "black box" tool designed to accurately measure how much it costs to build every single project (apps, websites, SaaS) using AI agentic coders like **Claude Code**, **Gemini CLI**, and **Codex CLI**.
 
-Mentre i provider mostrano i costi a livello di account, MR Blackbox sposta il focus sul **progetto**, tracciando sessioni, token e sprechi direttamente nella tua directory di lavoro.
-
----
-
-## 🚀 Perché MR Blackbox?
-
-Chi sviluppa oggi con l'AI affronta problemi comuni:
-- **Costi invisibili**: Non sai quanto ti è costata davvero quella specifica feature.
-- **Dati frammentati**: Claude, Gemini e Codex espongono dati in formati diversi.
-- **Mancanza di storico**: I prezzi cambiano, ma il costo della tua sessione passata non dovrebbe.
-- **Token sprecati**: Non sai dove il contesto sta diventando troppo pesante o inefficiente.
-
-MR Blackbox risponde a: *Quanto mi è costata davvero questa app?*
+While providers show costs at an account level, MR Blackbox shifts the focus to the **project**, tracking sessions, tokens, and waste directly in your working directory.
 
 ---
 
-## ✨ Caratteristiche Principali
+## 🚀 Why MR Blackbox?
 
-- 🕵️ **MR Transparent Tracing**: Attivalo con `mr on` e continua a programmare. Monitora silenziosamente i log dei coder senza interrompere il workflow.
-- 📊 **MR Usage Dashboard**: Una dashboard TUI (Terminal UI) completa con breakdown per provider, tier di token e trend giornalieri.
-- 💰 **MR Cost Engine**: Calcolo preciso basato su snapshot di pricing locali e tassi di cambio USD/EUR stabili.
-- 🧊 **MR Cache Inspector**: Analizza l'efficienza della cache (Context Caching) e visualizza quanto stai risparmiando.
-- 🛡️ **Privacy-First**: Tutti i dati, i transcript e i ledger rimangono locali nella cartella `.mr-blackbox/`.
+Developers building with AI today face common challenges:
+- **Invisible costs**: You don't know exactly how much a specific feature cost.
+- **Fragmented data**: Claude, Gemini, and Codex expose data in different formats.
+- **Historical instability**: Prices change, but the cost of your past sessions shouldn't.
+- **Wasted tokens**: You don't know where the context is becoming too heavy or inefficient.
+
+MR Blackbox answers: *How much did this app really cost to build?*
 
 ---
 
-## 🛠️ Installazione
+## ✨ Key Features
+
+- 🕵️ **MR Transparent Tracing**: Turn it on with `mr on` and keep coding. It silently monitors coder logs without interrupting your workflow.
+- 📊 **MR Usage Dashboard**: A full TUI (Terminal UI) dashboard with provider breakdowns, token tiers, and daily trends.
+- 💰 **MR Cost Engine**: Precise calculation based on local pricing snapshots and stable USD/EUR exchange rates.
+- 🧊 **MR Cache Inspector**: Analyzes cache efficiency (Context Caching) and shows how much you are saving.
+- 🛡️ **Privacy-First**: All data, transcripts, and ledgers stay local in the `.mr-blackbox/` folder.
+- 🌍 **Multi-language**: Supports both **English** and **Italian**.
+
+---
+
+## 🛠️ Installation
 
 ```bash
-# Clona il repository
+# Clone the repository
 git clone https://github.com/youruser/MRBlackbox.git
 cd MRBlackbox
 
-# Installa in modalità editabile
+# Install in editable mode
 pip install -e .
 ```
 
 ---
 
-## 📖 Guida Rapida
+## 📖 Quick Start
 
-### 1. Inizializza il progetto
-Crea il ledger locale per il tuo nuovo SaaS:
+### 1. Initialize the project
+Create the local ledger for your new SaaS:
 ```bash
 mr init --name "My Awesome SaaS" --type "webapp"
 ```
 
-### 2. Attiva il monitoraggio
-Fai partire la "scatola nera" prima di iniziare a programmare con Claude o Gemini:
+### 2. Activate tracing
+Start the "black box" before you begin coding with Claude or Gemini:
 ```bash
 mr on
 ```
 
-### 3. Controlla i costi
-In qualsiasi momento, visualizza il riepilogo o la dashboard completa:
+### 3. Check costs
+At any time, view the quick summary or the full dashboard:
 ```bash
-mr costview  # Vista rapida
-mr usage     # Dashboard completa
+mr costview  # Quick view
+mr usage     # Full dashboard
 ```
 
-### 4. Analizza l'efficienza
-Scopri quanto stai risparmiando grazie alla cache:
+### 4. Analyze efficiency
+See how much you are saving thanks to the cache:
 ```bash
 mr cache
 ```
 
 ---
 
-## 🤖 Provider Supportati
+## 🤖 Supported Providers
 
-| Provider | Stato | Livello Dettaglio |
+| Provider | Status | Detail Level |
 | :--- | :--- | :--- |
-| **Claude Code** | Stabile | **Exact** (Token tiers, Cache, Tools) |
+| **Claude Code** | Stable | **Exact** (Token tiers, Cache, Tools) |
 | **Gemini CLI** | Beta | **Derived** (Tokens, Context Caching) |
-| **Codex CLI** | Sperimentale | **Estimated** (Quota based) |
+| **Codex CLI** | Experimental | **Estimated** (Quota based) |
 
 ---
 
 ## 🗺️ Roadmap
 
-- [x] **Phase 1**: Supporto Claude Code & Core Engine.
-- [x] **Phase 2**: Integrazione Gemini CLI & Cache Inspector.
-- [ ] **Phase 3**: Supporto Codex & Marker di affidabilità dei dati.
-- [ ] **Phase 4**: MR Waste Score & Intelligence (suggerimenti per spendere meno).
+- [x] **Phase 1**: Claude Code Support & Core Engine.
+- [x] **Phase 2**: Gemini CLI Integration & Cache Inspector.
+- [ ] **Phase 3**: Codex Support & Data Reliability Markers.
+- [ ] **Phase 4**: MR Waste Score & Intelligence (savings suggestions).
 
 ---
 
-## 📄 Licenza
+## 📄 License
 
-Distribuito sotto Licenza MIT. Vedi `LICENSE` per maggiori informazioni.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 <p align="center">
-  Realizzato con ❤️ per la community di Indie Hackers e Sviluppatori AI.
+  Built with ❤️ for the Indie Hackers and AI Developers community.
 </p>

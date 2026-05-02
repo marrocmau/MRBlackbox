@@ -1,0 +1,6 @@
+typer[all]
+rich
+pydantic
+sqlalchemy
+requests
+watchdog

@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mr-blackbox"
+version = "0.1.0"
+description = "Local black box for AI coding costs"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "typer[all]",
+    "rich",
+    "pydantic",
+    "sqlalchemy",
+    "requests",
+    "watchdog",
+]
+
+[project.scripts]
+mr = "mr_blackbox.cli.main:app"
