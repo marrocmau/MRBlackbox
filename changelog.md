@@ -48,10 +48,24 @@ Tutte le modifiche rilevanti al progetto MR Blackbox saranno documentate in ques
 #### Corretto
 - Aggiornato il `CostEngine` per supportare diverse modalità di calcolo dinamiche.
 
+## [1.0.0] - 2026-05-02
+### Phase 4: Intelligence & Optimization - COMPLETATA ✅
+
+#### Aggiunto
+- **i18n Support**: Sistema di internazionalizzazione completo (Inglese/Italiano) per tutti i comandi e le dashboard, gestibile tramite variabile d'ambiente `MR_LANG`.
+- **MR Waste Score**: Algoritmo per il calcolo dell'efficienza nell'uso dei token, basato sul riutilizzo della cache e sul mix di modelli.
+- **MR Cost Replay**: Sistema di analisi proattiva che suggerisce percorsi di sviluppo alternativi (es. Gemini Flash per scansioni repo) per ridurre i costi fino al 50-60%.
+- **Reporting System**: Comando `mr report` per generare report completi in formato Markdown, pronti per la condivisione o per l'archiviazione del progetto.
+- **Intelligence Engine**: Nuovo modulo core dedicato all'analisi strategica dei dati del ledger.
+
+#### Documentazione & Sicurezza
+- **README**: Documentazione integrale in lingua inglese per un target internazionale.
+- **Privacy (.gitignore)**: Configurazione rigorosa per escludere dati sensibili (.mr-blackbox/), specifiche di prodotto e piani di sviluppo dal repository pubblico.
+
+#### Corretto
+- Migliorata la formattazione dei pannelli CLI per una migliore leggibilità su terminali di diverse dimensioni.
+
 ---
 
-## [In Corso] - Phase 4: Intelligence & Optimization 🚀
-
-- [ ] **MR Waste Score**: Algoritmo per il calcolo dello spreco di token.
-- [ ] **MR Cost Replay**: Suggerimenti di routing alternativo per risparmio.
-- [ ] **MR Report**: Generazione di report Markdown e HTML finali.
+## [Stabile] - Versione 1.0.0 rilasciata 🚀
+Tutte le fasi della roadmap originale sono state completate con successo.

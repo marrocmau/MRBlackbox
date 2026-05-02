@@ -257,6 +257,103 @@ def usage():
     renderer.render_usage()
 
 @app.command()
+def waste():
+    """Calculates the project waste score."""
+    root = StorageManager.find_project_root(Path.cwd())
+    if not root:
+        console.print(f"[bold red]{i18n.t('error')}[/bold red] {i18n.t('not_project')}")
+        return
+    
+    import json
+    from mr_blackbox.engine.intelligence import IntelligenceEngine
+    
+    with open(root / ".mr-blackbox" / "ledger.json", "r") as f:
+        data = json.load(f)
+        
+    engine = IntelligenceEngine(data)
+    result = engine.calculate_waste_score()
+    
+    score = result["score"]
+    color = "green" if score < 30 else "yellow" if score < 60 else "red"
+    
+    console.print(Panel(
+        f"MR Waste Score: [bold {color}]{score}/100[/bold {color}]\n\n" +
+        "\n".join([f"• {c}" for c in result["causes"]]) +
+        f"\n\nEstimated avoidable cost: [green]${result['avoidable_usd']:.2f}[/green]",
+        title="MR Intelligence"
+    ))
+
+@app.command()
+def replay():
+    """Shows alternative cost routes for the project."""
+    root = StorageManager.find_project_root(Path.cwd())
+    if not root:
+        console.print(f"[bold red]{i18n.t('error')}[/bold red] {i18n.t('not_project')}")
+        return
+    
+    import json
+    from mr_blackbox.engine.intelligence import IntelligenceEngine
+    
+    with open(root / ".mr-blackbox" / "ledger.json", "r") as f:
+        data = json.load(f)
+        
+    engine = IntelligenceEngine(data)
+    result = engine.generate_replay()
+    
+    console.print(Panel(
+        f"[bold]Actual route[/bold]\n{result['actual']['route']}: ${result['actual']['cost']:.2f}\n\n"
+        f"[bold]Alternative route[/bold]\n{result['alternative']['route']}: ${result['alternative']['cost']:.2f}\n\n"
+        f"Estimated saving: [bold green]{result['savings_pct']}%[/bold green]",
+        title="MR Cost Replay"
+    ))
+
+@app.command()
+def report():
+    """Generates a Markdown project report."""
+    root = StorageManager.find_project_root(Path.cwd())
+    if not root:
+        console.print(f"[bold red]{i18n.t('error')}[/bold red] {i18n.t('not_project')}")
+        return
+
+    import json
+    from datetime import datetime
+    
+    with open(root / ".mr-blackbox" / "ledger.json", "r") as f:
+        data = json.load(f)
+    
+    with open(root / ".mr-blackbox" / "project.json", "r") as f:
+        project = json.load(f)
+        
+    report_content = f"""# MR Blackbox Report — {project['name']}
+Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+
+## Project Summary
+- **Type**: {project['type']}
+- **Currency**: {project['currency_primary']}
+- **Total Cost**: ${data['totals']['usd']:.2f} / €{data['totals']['eur']:.2f}
+- **Total Tokens**: {data['totals']['tokens']:,}
+- **Sessions**: {len(data['sessions'])}
+
+## Cost by Provider
+| Provider | USD | % |
+| :--- | :--- | :--- |
+"""
+    providers = {}
+    for s in data['sessions']:
+        p = s["session"].get("provider", "unknown")
+        providers[p] = providers.get(p, 0.0) + s["cost"].get("total_usd", 0.0)
+    
+    for p, cost in providers.items():
+        pct = (cost / data['totals']['usd'] * 100) if data['totals']['usd'] > 0 else 0
+        report_content += f"| {p} | ${cost:.2f} | {pct:.1f}% |\n"
+
+    report_path = root / ".mr-blackbox" / "reports" / f"report-{datetime.now().strftime('%Y%m%d-%H%M')}.md"
+    with open(report_path, "w") as f:
+        f.write(report_content)
+        
+    console.print(Panel(f"Report generated successfully:\n[cyan]{report_path}[/cyan]", title="MR Report"))
+
+@app.command()
 def status():
     """Shows the current project status."""
     root = StorageManager.find_project_root(Path.cwd())
